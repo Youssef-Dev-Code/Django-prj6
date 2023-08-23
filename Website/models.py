@@ -2,8 +2,8 @@ from typing import Any
 from django.db import models
 
 SEXE = (
-    ("H", "Homme"),
-    ("F", "Femme"),
+    ("Homme", "Homme"),
+    ("Femme", "Femme"),
 )
 
 TYPES = (
@@ -12,66 +12,80 @@ TYPES = (
 )
 
 SIT_CONJ = (
-    ("M", "Marié"),
-    ("C", "Célibataire"),
-    ("D", "Divorcé"),
-    ("V", "Veufe"),
+    ("Marié", "Marié"),
+    ("Célibataire", "Célibataire"),
+    ("Divorcé", "Divorcé"),
+    ("Veufe", "Veufe"),
 )
 
 PAIEMENT = (
-    ("C", "Chèque"),
-    ("V", "Virement"),
-    ("E", "Espèce"),
+    ("Chèque", "Chèque"),
+    ("Virement", "Virement"),
+    ("Espèce", "Espèce"),
 )
 
 DESIGNATION_CONTRAT = (
-    ("S", "SIVP"),
-    ("C", "Contractuel"),
-    ("O", "Occasionnel"),
-    ("P", "Permanent"),
-    ("T", "Titulaire"),
+    ("SVIP", "SIVP"),
+    ("Contractuel", "Contractuel"),
+    ("Occasionnel", "Occasionnel"),
+    ("Permanent", "Permanent"),
+    ("Titulaire", "Titulaire"),
 )
 
 DESIGNATION_LOCAL = (
-    ("S", "Siège"),
-    ("M1", "Marsa corniche"),
-    ("M2", "Marsa saada"),
-    ("TS", "Tunis city"),
-    ("AS", "Azur city"),
-    ("MS", "Mall of Sousse"),
-    ("MT", "Mall de Tunis"),
+    ("Siège", "Siège"),
+    ("Marsa corniche", "Marsa corniche"),
+    ("MMarsa saada", "Marsa saada"),
+    ("Tunis city", "Tunis city"),
+    ("Azur city", "Azur city"),
+    ("Mall of Sousse", "Mall of Sousse"),
+    ("Mall de Tunis", "Mall de Tunis"),
 )
 
 class CNSS(models.Model):
     Date_Affectation = models.DateField(null=True, blank=True)
     Numero = models.CharField(max_length=40, unique= True)
     Type = models.CharField(max_length=4, choices= TYPES)
+    def __str__(self):
+        return "cnss {0}".format(self.Numero)
 
 class Situation(models.Model):
     Sexe = models.CharField(max_length=10, choices= SEXE) 
     sit_conjug = models.CharField(max_length=40, choices= SIT_CONJ) 
     nb_Enfants = models.SmallIntegerField(null=True, blank=True)
-    chef_famille = models.BooleanField() 
+    chef_famille = models.BooleanField()
+    def __str__(self):
+        return "Situation "
     
 class Banque(models.Model):
     Designation = models.CharField(max_length=50)
     RIB = models.BigIntegerField(null= True, unique=True)
     Paiement = models.CharField(max_length= 10, choices= PAIEMENT, null= True)
+    def __str__(self):
+        return "Banque: ({0}) ({1})".format( self.Designation, self.RIB)
 
 class Local(models.Model):
     Designation = models.CharField(max_length=25, choices= DESIGNATION_LOCAL)
+    def __str__(self):
+        return "Local: {0}".format(self.Designation)
 
 class Etat_Contrat(models.Model):
     Designation = models.CharField(max_length=20, choices= DESIGNATION_CONTRAT)
+    def __str__(self):
+        return "Contrat: {0}".format(self.Designation)
 
 class Poste(models.Model):
     Designation = models.CharField(max_length=30)
     Description = models.TextField(max_length=500)
-
+    def __str__(self):
+        return "Poste: {0}".format(self.Designation)
+    
 class Affectation(models.Model):
     Id_Local = models.ForeignKey(Local, on_delete= models.CASCADE, null=True, blank=True)
     Id_Poste = models.ForeignKey(Poste, on_delete= models.CASCADE, null=True, blank=True)
     Id_Etat_Contrat = models.ForeignKey(Etat_Contrat, on_delete= models.CASCADE, null=True, blank=True)
+    def __str__(self):
+        return "Affectation"
 
 class Employé(models.Model):
     Prénom = models.CharField(max_length=30, null=False, blank=True)
@@ -91,5 +105,4 @@ class Employé(models.Model):
     Id_Affectation = models.ForeignKey(Affectation, on_delete= models.CASCADE, null=True, blank=True)
     
     def __str__(self):
-        return "{0} {1}".format(self.Prénom, self.Nom)
-        
+        return "Employé: {0} {1}".format( self.Prénom, self.Nom)

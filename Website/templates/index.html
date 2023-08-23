@@ -17,7 +17,7 @@
     </head>
     <style>
         .material-symbols-outlined{
-            color: black;
+            color: rgb(45, 186, 132);
             background-color: transparent;
             border-color: transparent;
         }
@@ -58,6 +58,43 @@
                 </div>
             </div>
         </nav>
+        <div class="container" style="margin-left: 10%;">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Affectations</th>
+                      <th scope="col">Banque</th>
+                      <th scope="col">CNSS</th>
+                      <th scope="col">Situation</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr>
+                        <td style="width: 10%;">
+                            <button class="material-symbols-outlined" onclick="window.open('Affectation', 'Banques', 'width=1000,height=1000');">
+                                open_in_new
+                            </button>
+                        </td>
+                        <td style="width: 10%;">
+                            <button class="material-symbols-outlined" onclick="window.open('Banque', 'Banques', 'width=1000,height=1000');">
+                                open_in_new
+                            </button>
+                        </td>
+                        <td style="width: 10%;">
+                            <button class="material-symbols-outlined" onclick="window.open('CNSS', 'Banques', 'width=1000,height=1000');">
+                                open_in_new
+                            </button>
+                        </td>
+                        <td style="width: 5%;">
+                            <button class="material-symbols-outlined" onclick="window.open('Situation', 'Banques', 'width=1000,height=1000');">
+                                open_in_new
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
         <div class="container">
             <table class="table">
                 <thead>
@@ -71,10 +108,6 @@
                       <th scope="col">Salaire</th>
                       <th scope="col">Echelon</th>
                       <th scope="col">Categorie</th>
-                      <th scope="col">Affectations</th>
-                      <th scope="col">Banque</th>
-                      <th scope="col">CNSS</th>
-                      <th scope="col">Situation</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,26 +122,6 @@
                         <td>{{emp.Salaire_de_Base}} dt</td>
                         <td>{{emp.Echelon}}</td>
                         <td>{{emp.Categorie}}</td>
-                        <td>
-                            <button class="material-symbols-outlined" onclick="window.open('Affectation', 'Banques', 'width=1000,height=300');">
-                                open_in_new
-                            </button>
-                        </td>
-                        <td>
-                            <button class="material-symbols-outlined" onclick="window.open('Banque', 'Banques', 'width=1000,height=300');">
-                                open_in_new
-                            </button>
-                        </td>
-                        <td>
-                            <button class="material-symbols-outlined" onclick="window.open('CNSS', 'Banques', 'width=1000,height=300');">
-                                open_in_new
-                            </button>
-                        </td>
-                        <td>
-                            <button class="material-symbols-outlined" onclick="window.open('Situation', 'Banques', 'width=1000,height=300');">
-                                open_in_new
-                            </button>
-                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

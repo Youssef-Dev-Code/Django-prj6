@@ -21,28 +21,22 @@
                 <thead>
                     <tr>
                       <th scope="col">Id</th>
-                      <th scope="col">Matricule</th>
                       <th scope="col">Prénom</th>
                       <th scope="col">Nom</th>
-                      <th scope="col">CIN</th>
-                      <th scope="col">Tel</th>
-                      <th scope="col">Salaire</th>
-                      <th scope="col">Echelon</th>
-                      <th scope="col">Categorie</th>
+                      <th scope="col">Local</th>
+                      <th scope="col">Poste</th>
+                      <th scope="col">Contrat</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for emp in emp_list %}   
                     <tr>
                         <th scope="row">{{emp.id}}</th>
-                        <td>{{emp.Matricule}}</td>
                         <td>{{emp.Prénom}}</td>
                         <td>{{emp.Nom}}</td>
-                        <td>{{emp.CIN}}</td>
-                        <td>{{emp.Télephone}}</td>
-                        <td>{{emp.Salaire_de_Base}} dt</td>
-                        <td>{{emp.Echelon}}</td>
-                        <td>{{emp.Categorie}}</td>
+                        <td>{{emp.Id_Affectation.Id_Local.Designation}}</td>
+                        <td>{{emp.Id_Affectation.Id_Poste.Designation}}</td>
+                        <td>{{emp.Id_Affectation.Id_Etat_Contrat.Designation}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
