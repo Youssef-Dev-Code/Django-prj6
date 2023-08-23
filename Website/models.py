@@ -44,7 +44,7 @@ DESIGNATION_LOCAL = (
 
 class CNSS(models.Model):
     Date_Affectation = models.DateField(null=True, blank=True)
-    Numero = models.CharField(max_length=40)
+    Numero = models.CharField(max_length=40, unique= True)
     Type = models.CharField(max_length=4, choices= TYPES)
 
 class Situation(models.Model):
@@ -55,7 +55,7 @@ class Situation(models.Model):
     
 class Banque(models.Model):
     Designation = models.CharField(max_length=50)
-    RIB = models.BigIntegerField(null= True)
+    RIB = models.BigIntegerField(null= True, unique=True)
     Paiement = models.CharField(max_length= 10, choices= PAIEMENT, null= True)
 
 class Local(models.Model):
@@ -76,15 +76,20 @@ class Affectation(models.Model):
 class Employé(models.Model):
     Prénom = models.CharField(max_length=30, null=False, blank=True)
     Nom = models.CharField(max_length=30, null=False, blank=True)
+    Matricule = models.BigIntegerField(null=False)
+    Télephone = models.BigIntegerField(null=False)
     Date_Naissance = models.DateField(null=True, blank=True)
     Lieu_Naissance = models.CharField(max_length=40, null=True, blank=True)
     Adresse = models.CharField(max_length=60, null=True, blank=True)
     Echelon = models.SmallIntegerField(null=True, blank=True)
     Categorie = models.SmallIntegerField(null=True, blank=True)
     Salaire_de_Base = models.DecimalField(max_digits=8, decimal_places=3, null=False, blank=True)
-    CIN = models.CharField(max_length=8, null=False, blank=True)
+    CIN = models.CharField(max_length=8, null=False, blank=True, unique=True)
     Id_Banque = models.ForeignKey(Banque, on_delete= models.CASCADE, null=True, blank=True)
     Id_Situation = models.ForeignKey(Situation, on_delete= models.CASCADE, null=True, blank=True)
     Id_CNSS = models.ForeignKey(CNSS, on_delete= models.CASCADE, null=True, blank=True)
     Id_Affectation = models.ForeignKey(Affectation, on_delete= models.CASCADE, null=True, blank=True)
     
+    def __str__(self):
+        return "{0} {1}".format(self.Prénom, self.Nom)
+        

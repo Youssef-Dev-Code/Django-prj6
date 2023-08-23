@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <!--My stylesheets-->
+        {% load static %}
+        <link rel = "stylesheet", type = "text/css" href = "{% static 'css/index.css' %}">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'Pictures/favicon.ico' %}">
+        <!--bootstrap-->
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM' crossorigin='anonymous'>
+        <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js' ></script>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js' integrity='sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT' crossorigin='anonymous'></script>
+        <title>Liste des employés</title>
+        
+    </head>
+    <body>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Matricule</th>
+                      <th scope="col">Prénom</th>
+                      <th scope="col">Nom</th>
+                      <th scope="col">CIN</th>
+                      <th scope="col">Tel</th>
+                      <th scope="col">Salaire</th>
+                      <th scope="col">Echelon</th>
+                      <th scope="col">Categorie</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in emp_list %}   
+                    <tr>
+                        <th scope="row">{{emp.id}}</th>
+                        <td>{{emp.Matricule}}</td>
+                        <td>{{emp.Prénom}}</td>
+                        <td>{{emp.Nom}}</td>
+                        <td>{{emp.CIN}}</td>
+                        <td>{{emp.Télephone}}</td>
+                        <td>{{emp.Salaire_de_Base}} dt</td>
+                        <td>{{emp.Echelon}}</td>
+                        <td>{{emp.Categorie}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
