@@ -55,10 +55,11 @@ class Situation(models.Model):
     nb_Enfants = models.SmallIntegerField(null=True, blank=True)
     chef_famille = models.BooleanField()
     def __str__(self):
-        return "Situation "
+        return "{0}/{1}/{2}".format(self.Sexe, self.sit_conjug, self.nb_Enfants)
     
 class Banque(models.Model):
     Designation = models.CharField(max_length=50)
+    Adresse = models.CharField(max_length=60, null=True, blank=True)
     RIB = models.BigIntegerField(null= True, unique=True)
     Paiement = models.CharField(max_length= 10, choices= PAIEMENT, null= True)
     def __str__(self):
@@ -85,7 +86,7 @@ class Affectation(models.Model):
     Id_Poste = models.ForeignKey(Poste, on_delete= models.CASCADE, null=True, blank=True)
     Id_Etat_Contrat = models.ForeignKey(Etat_Contrat, on_delete= models.CASCADE, null=True, blank=True)
     def __str__(self):
-        return "Affectation"
+        return "{0} {1} {2}".format(self.Id_Local.Designation, self.Id_Poste.Designation, self.Id_Etat_Contrat.Designation)
 
 class Employé(models.Model):
     Prénom = models.CharField(max_length=30, null=False, blank=True)

@@ -19,31 +19,27 @@
             <table class="table">
                 <thead>
                     <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Matricule</th>
+                      <th scope="col">Id_Emp</th>
                       <th scope="col">Prénom</th>
                       <th scope="col">Nom</th>
-                      <th scope="col">CIN</th>
-                      <th scope="col">Tel</th>
-                      <th scope="col">Salaire</th>
-                      <th scope="col">Echelon</th>
-                      <th scope="col">Categorie</th>
-
+                      <th scope="col">Id_Banque</th>
+                      <th scope="col">Banque</th>
+                      <th scope="col">Adresse</th>
+                      <th scope="col">RIB</th>
+                      <th scope="col">Paiement</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for emp in emp_list %}   
                     <tr>
                         <th scope="row">{{emp.id}}</th>
-                        <td>{{emp.Matricule}}</td>
                         <td>{{emp.Prénom}}</td>
                         <td>{{emp.Nom}}</td>
-                        <td>{{emp.CIN}}</td>
-                        <td>{{emp.Télephone}}</td>
-                        <td>{{emp.Salaire_de_Base}} dt</td>
-                        <td>{{emp.Echelon}}</td>
-                        <td>{{emp.Categorie}}</td>
-
+                        <td>{{emp.Id_Banque.id}}</td>
+                        <td>{{emp.Id_Banque.Designation}}</td>
+                        <td>{{emp.Id_Banque.Adresse}}</td>
+                        <td>{{emp.Id_Banque.RIB}}</td>
+                        <td>{{emp.Id_Banque.Paiement}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
