@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(186, 214, 215) !important;
+}
+.material-symbols-outlined{
+    color: rgb(45, 186, 132);
+    background-color: transparent;
+    border-color: transparent;
+}
+.btn-outline-secondary{
+    background-color: white !important;
+    color: black !important;
+    border-color: black !important;
+}
+.btn-outline-secondary:hover{
+    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity)) !important;
+}

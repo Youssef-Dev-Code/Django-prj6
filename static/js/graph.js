@@ -1,0 +1,49 @@
+
+window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        exportEnabled: true,
+        animationEnabled: true,
+        theme: "dark2",
+        title: {
+            text: "Website Audience Comparison"
+        },
+        axisX: {
+            valueFormatString: "MMM"
+        },
+        axisY: {
+            title: "User Count"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            itemclick: toggleDataSeries
+        },
+        data: [{
+            type: "line",
+            name: "2020",
+            showInLegend: true,
+            yValueFormatString: "#,##0",
+            dataPoints: {{ user_data_2020|safe }}
+        },{
+            type: "line",
+
+            showInLegend: true,
+            yValueFormatString: "#,##0",
+            dataPoints: {{ user_data_2021|safe }}
+        }]
+    });
+    chart.render();
+ 
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+ 
+}

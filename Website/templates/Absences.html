@@ -51,62 +51,11 @@
                             <a class="nav-link" href="/Absences">Absences</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" method="POST" action="{% url 'Search-Employé' %}">
-                        {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Recherche d'employés" aria-label="Search" name="Search-Input">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
-        <!--Messages-->
-        {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-                <center>{{ message | safe }}</center>
-            </div>
-        {% endfor %}
-        <center>
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">Affectations</th>
-                        <th scope="col">Banque</th>
-                        <th scope="col">CNSS</th>
-                        <th scope="col">Situation</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                        <tr>
-                            <td style="width: 10%;">
-                                <button class="material-symbols-outlined" onclick="window.open('Affectation', 'Banques', 'width=1000,height=1000, left = 290');">
-                                    open_in_new
-                                </button>
-                            </td>
-                            <td style="width: 10%;">
-                                <button class="material-symbols-outlined" onclick="window.open('Banque', 'Banques', 'width=1000,height=1000, left = 290');">
-                                    open_in_new
-                                </button>
-                            </td>
-                            <td style="width: 10%;">
-                                <button class="material-symbols-outlined" onclick="window.open('CNSS', 'Banques', 'width=1000,height=1000, left = 290');">
-                                    open_in_new
-                                </button>
-                            </td>
-                            <td style="width: 5%;">
-                                <button class="material-symbols-outlined" onclick="window.open('Situation', 'Banques', 'width=1000,height=1000, left = 290');">
-                                    open_in_new
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <h1>
-                Liste des employés
-            </h1>
-        </center>
+        <br>
+        <center><h1>Liste des Absences</h1></center>
         <br>
         <div class="container">
             <table class="table">
@@ -118,12 +67,10 @@
                       <th scope="col">Nom</th>
                       <th scope="col">CIN</th>
                       <th scope="col">Tel</th>
-                      <th scope="col">Salaire</th>
-                      <th scope="col">Echelon</th>
-                      <th scope="col">Categorie</th>
-                      <th scope="col">Adresse</th>
-                      <th scope="col">D_Naissance</th>
-                      <th scope="col">L_Naissance</th>
+                      <th scope="col">Congés annuels restants</th>
+                      <th scope="col">Congés maladie restants</th>
+                      <th scope="col">Congés Non Payés</th>
+                      <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,12 +82,16 @@
                         <td>{{emp.Nom}}</td>
                         <td>{{emp.CIN}}</td>
                         <td>{{emp.Télephone}}</td>
-                        <td>{{emp.Salaire_de_Base}} dt</td>
-                        <td>{{emp.Echelon}}</td>
-                        <td>{{emp.Categorie}}</td>
-                        <td>{{emp.Adresse}}</td>
-                        <td>{{emp.Date_Naissance}}</td>
-                        <td>{{emp.Lieu_Naissance}}</td>
+                        <td>{{emp.Id_Congés.Congés_Annuels}}</td>
+                        <td>{{emp.Id_Congés.Congés_Maladie}}</td>
+                        <td>{{emp.Id_Congés.Congés_Sans_Solde}}</td>
+                        <td>
+                            <form class="d-flex" role="search" method="POST" action="{% url 'Search-Absence' %}">
+                                {% csrf_token %}
+                                <input class="form-control me-2" type="hidden" value="{{emp.id}}" placeholder="Recherche Absence" aria-label="Search" name="Absence_Individuelle">
+                                <button class="btn btn-outline-secondary" type="submit">Détails</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

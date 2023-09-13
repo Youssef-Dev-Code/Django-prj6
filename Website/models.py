@@ -88,6 +88,12 @@ class Affectation(models.Model):
     def __str__(self):
         return "{0} {1} {2}".format(self.Id_Local.Designation, self.Id_Poste.Designation, self.Id_Etat_Contrat.Designation)
 
+class Congés(models.Model):
+    Absence  = models.SmallIntegerField(null=False, blank=True, default= 0)
+    Congés_Annuels = models.SmallIntegerField(null=False, blank=True, default= 26)
+    Congés_Maladie = models.SmallIntegerField(null=False, blank=True, default= 7)
+    Congés_Sans_Solde = models.SmallIntegerField(null=False, blank=True, default= 0)
+    
 class Employé(models.Model):
     Prénom = models.CharField(max_length=30, null=False, blank=True)
     Nom = models.CharField(max_length=30, null=False, blank=True)
@@ -98,12 +104,12 @@ class Employé(models.Model):
     Adresse = models.CharField(max_length=60, null=True, blank=True)
     Echelon = models.SmallIntegerField(null=True, blank=True)
     Categorie = models.SmallIntegerField(null=True, blank=True)
-    Salaire_de_Base = models.DecimalField(max_digits=8, decimal_places=3, null=False, blank=True)
+    Salaire_de_Base = models.DecimalField(max_digits=8, decimal_places=2, null=False, blank=True)
     CIN = models.CharField(max_length=8, null=False, blank=True, unique=True)
-    Id_Banque = models.ForeignKey(Banque, on_delete= models.CASCADE, null=True, blank=True)
+    Id_Banque = models.OneToOneField(Banque, on_delete= models.CASCADE, null=True, blank=True)
     Id_Situation = models.ForeignKey(Situation, on_delete= models.CASCADE, null=True, blank=True)
-    Id_CNSS = models.ForeignKey(CNSS, on_delete= models.CASCADE, null=True, blank=True)
+    Id_CNSS = models.OneToOneField(CNSS, on_delete= models.CASCADE, null=True, blank=True)
     Id_Affectation = models.ForeignKey(Affectation, on_delete= models.CASCADE, null=True, blank=True)
-    
+    Id_Congés = models.OneToOneField(Congés, on_delete= models.CASCADE, null=True, blank=True)
     def __str__(self):
         return "Employé: {0} {1}".format( self.Prénom, self.Nom)
